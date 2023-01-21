@@ -251,19 +251,25 @@ function findChildren(personObj, peopleArr){
 
 
 // function findGrandChildren(personObj, peopleArr){
-//         for (let children = 0; children < 5; children++){
-//             let grandChildren = findChildren(personObj, peopleArr);
-//             return grandChildren
+//         for (let  children= 0; children < 5; children++){
+//             return findChildren(personObj[children], peopleArr);
 //         }
 // }
 
 function findGrandChildren(personObj, peopleArr){
-    for (let children = 0; children < 5; children++){
-        return peopleArr.filter(function(item){
-            return item.parents.includes(personObj.id)
-        })
+    for (let child in personObj){
+        findChildren(personObj[child], peopleArr);
     }
+    return 
 }
+
+// function findGrandChildren(personObj, peopleArr){
+//     for (let child in personObj){
+//         return peopleArr.filter(function(item){
+//             return item.parents.includes(personObj[child].id)
+//         })
+//     }
+// }
 
 
 function searchByTraits(peopleArr){
