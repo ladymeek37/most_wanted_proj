@@ -270,6 +270,9 @@ function searchByTraits(peopleArr){
         if (traitsNumberSearch === "one") {
             oneTraitSearch(peopleArr);
         }
+        if (traitsNumberSearch === "multiple"){
+            multipleTraitSearch(peopleArr);
+        }
 }
 
 function oneTraitSearch(peopleArr) {
@@ -293,7 +296,12 @@ function oneTraitSearch(peopleArr) {
     });
     displayFamily(foundItems, "Search Results")
     return foundItems;
-    
+}
 
-
+function multipleTraitSearch(peopleArr){
+    let userInputProp = promptFor("Please enter what property you would like to search by: (gender, height, weight, eyeColor, occupation)", chars);
+    let userInputVal = promptFor("Please enter what values for your trait search:", chars);
+    let foundItems = peopleArr.filter(function (person){
+        
+    })
 }
