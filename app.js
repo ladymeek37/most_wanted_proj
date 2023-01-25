@@ -240,7 +240,6 @@ function findPersonDescendants(personObj, peopleArr){
     displayFamily(children, "Child")
     // f. finds grandchildren by id
     let grandChildren = findGrandChildren(children, peopleArr);
-    displayFamily(grandChildren, "Grandchild")
 }
 
 function findChildren(personObj, peopleArr){
@@ -250,26 +249,20 @@ function findChildren(personObj, peopleArr){
 }
 
 
-// function findGrandChildren(personObj, peopleArr){
-//         for (let  children= 0; children < 5; children++){
-//             return findChildren(personObj[children], peopleArr);
-//         }
-// }
 
 function findGrandChildren(personObj, peopleArr){
+    const result = [];
     for (let child in personObj){
-        findChildren(personObj[child], peopleArr);
+     let grandChild =  findChildren(personObj[child], peopleArr);
+     if (grandChild.length > 0){
+        displayFamily(grandChild, "Grandchild")
+     }
+     
     }
-    return 
+    
+    return result
 }
 
-// function findGrandChildren(personObj, peopleArr){
-//     for (let child in personObj){
-//         return peopleArr.filter(function(item){
-//             return item.parents.includes(personObj[child].id)
-//         })
-//     }
-// }
 
 
 function searchByTraits(peopleArr){
@@ -283,12 +276,13 @@ function searchByTraits(peopleArr){
 function oneTraitSearch(peopleArr) {
     let traitSearch = promptFor("Please enter what trait you would like to search by: (gender, height, weight, eyeColor, occupation)", chars);
         if (traitSearch === "gender") {
-            traitSearch = promptFor("Would you like to search by male or female?");
-                if (traitSearch === "female"){
-                    return peopleArr.filter(function(personObj){
-                        if(personObj.gender.includes("female")){
-                            return true
-                        }})
-                    }
+            let userInput = promptFor("Would you like to search by male or female?", chars);
+            let foundGender = peopleArr.filter(function (person) {
+                if (person.gender.includes(userInput)){
+                    return true;
+                }
+            displayFamily(foundGender, "Search Match:")
+            });
+            return foundGender;  
             }
         }
