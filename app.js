@@ -269,20 +269,31 @@ function searchByTraits(peopleArr){
     let traitsNumberSearch = promptFor("Would you like to search by one trait or multiple?", chars);
         if (traitsNumberSearch === "one") {
             oneTraitSearch(peopleArr);
-
         }
 }
 
 function oneTraitSearch(peopleArr) {
-    let traitSearch = promptFor("Please enter what trait you would like to search by: (gender, height, weight, eyeColor, occupation)", chars);
-        if (traitSearch === "gender") {
-            let userInput = promptFor("Would you like to search by male or female?", chars);
-            let foundGender = peopleArr.filter(function (person) {
-                if (person.gender.includes(userInput)){
-                    return true;
-                }
-            displayFamily(foundGender, "Search Match:")
-            });
-            return foundGender;  
+    let userInputProp = promptFor("Please enter what property you would like to search by: (gender, height, weight, eyeColor, occupation)", chars);
+    let userInputVal =  promptFor("Please enter a value for your trait seach:", chars);
+    let foundItems = peopleArr.filter(function (person){
+        try {
+            if (person[userInputProp]===(userInputVal)) {
+                return true;
+            }
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+        finally {
+            if (person[userInputProp]===parseInt(userInputVal)){
+                return true;
             }
         }
+    });
+    displayFamily(foundItems, "Search Results")
+    return foundItems;
+    
+
+
+}
