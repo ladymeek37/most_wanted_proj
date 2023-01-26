@@ -266,11 +266,11 @@ function findGrandChildren(personObj, peopleArr){
 
 
 function searchByTraits(peopleArr){
-    let traitsNumberSearch = promptFor("Would you like to search by one trait or multiple?", chars);
+    let traitsNumberSearch = promptFor("Would you like to search by one trait or two?", chars);
         if (traitsNumberSearch === "one") {
             oneTraitSearch(peopleArr);
         }
-        if (traitsNumberSearch === "multiple"){
+        if (traitsNumberSearch === "two"){
             multipleTraitSearch(peopleArr);
         }
 }
@@ -294,14 +294,40 @@ function oneTraitSearch(peopleArr) {
             }
         }
     });
-    displayFamily(foundItems, "Search Results")
+    displayFamily(foundItems, " ")
     return foundItems;
 }
 
 function multipleTraitSearch(peopleArr){
-    let userInputProp = promptFor("Please enter what property you would like to search by: (gender, height, weight, eyeColor, occupation)", chars);
-    let userInputVal = promptFor("Please enter what values for your trait search:", chars);
-    let foundItems = peopleArr.filter(function (person){
-        
+    let userInputProp = promptFor("Please enter what properties you would like to search by: (gender, height, weight, eyeColor, occupation)", chars);
+    let propArray = userInputProp.split(" ");
+    let userInputVal = promptFor(`Enter the value for ${propArray[0]} trait search:`, chars);
+        let foundItems = peopleArr.filter(function (person){
+            if (person[propArray[0]]===(userInputVal)){
+                return true;
+            }
     })
-}
+                let newUserInputVal = promptFor(`Enter the value for ${propArray[1]} trait search:`, chars);
+                let newFoundItems = foundItems.filter(function (person){
+                    if (person[propArray[1]]===(newUserInputVal)){
+                        return true;
+                    }
+                })
+            displayFamily(newFoundItems, "Search Results")      
+            }
+
+// function multipleTraitSearch(peopleArr){
+//     let userInputProp = promptFor("Please enter what property you would like to search by: (gender, height, weight, eyeColor, occupation)", chars);
+//     let propArray = userInputProp.split(" ");
+//         for (let prop of propArray){
+//             let userInputVal = promptFor(`Enter the value for ${prop} trait search:`, chars);
+//             let foundItems = peopleArr.filter(function (person){
+//                 if (person[prop]===(userInputVal)){
+//                     return true;
+//                 }
+//         })
+//     displayFamily(foundItems, "Search Results")  
+  
+//     };
+
+// }
