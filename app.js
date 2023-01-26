@@ -204,13 +204,28 @@ function chars(input) {
 function findPersonFamily(personObj={}, peopleArr=[]){
     // f. finds person by id (sp)
     let spouse = findById(personObj, peopleArr, "currentSpouse");
-    displayFamily(spouse, "Spouse")
+    if (spouse.length > 0){
+        displayFamily(spouse, "Spouse")
+    }else { 
+        alert("No spouse found.")
+    }
+
     // f. finds people by id (parent)
     let parents = findParents(personObj, peopleArr);
-    displayFamily(parents, "Parents")
+    if (parents.length > 0){
+        displayFamily(parents, "Parents")
+    } else {
+        alert("No parents found.")
+    }
+    
     // f. finds people based off parents (siblings)
     let siblings = findSibs(personObj, peopleArr);
-    displayFamily(siblings, "Siblings")
+    if (siblings.length > 0){
+        displayFamily(siblings, "Siblings")
+    } else { 
+        alert("No siblings found.")
+    }
+    
     // return collection of people
     return spouse.concat(parents).concat(siblings)
 }
