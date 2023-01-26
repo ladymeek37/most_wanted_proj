@@ -78,7 +78,7 @@ function mainMenu(person, people) {
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            //alert(personDescendants);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -252,7 +252,11 @@ function findSibs(personObj, peopleArr){
 function findPersonDescendants(personObj, peopleArr){
     // f. finds children by id
     let children = findChildren(personObj, peopleArr);
-    displayFamily(children, "Child")
+    if (children.length > 0){
+    displayFamily(children, "Child")        
+    }else{
+        alert ("No children found.")
+    }
     // f. finds grandchildren by id
     let grandChildren = findGrandChildren(children, peopleArr);
 }
@@ -270,8 +274,7 @@ function findGrandChildren(personObj, peopleArr){
     for (let child in personObj){
      let grandChild =  findChildren(personObj[child], peopleArr);
      if (grandChild.length > 0){
-        displayFamily(grandChild, "Grandchild")
-     }
+        displayFamily(grandChild, "Grandchild")}
      
     }
     
@@ -309,7 +312,7 @@ function oneTraitSearch(peopleArr) {
             }
         }
     });
-    displayFamily(foundItems, " ")
+    displayFamily(foundItems, "Search Results")
     return foundItems;
 }
 
